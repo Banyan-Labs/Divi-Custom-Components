@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Carousel Sample</title>
+</head>
+
+<body>
+
+    <!-- simulate expected global conditions - our 'plugin' should inherit what it can -->
+    <style>
+        body {
+            font-family: 'open sans', sans-serif;
+            --color: #4B1249;
+        }
+    </style>
+
+    <div class="divi-row-simulator" style="height: 400px">
+
+        <!-- ====================== BEGIN DIVI DROP ============================================================== -->
+        <section class="carousel">
+            <div id="container">
+
+                <div id="cardstrip">
+
+                    <!-- insert card data here.  Add appropriate styling as needed -->
+
+                    <div class="blcard">
+                        <img src="http://168.61.151.157/wp-content/uploads/2021/11/benny_goodman.png" alt="x">
+                        <p class="usertext">Abe Goodman</p>
+                        <p class="usertext">Full Stack Divi</p>
+                    </div>
+                    <div class="blcard">
+                        <img src="http://168.61.151.157/wp-content/uploads/2021/11/benny_goodman.png" alt="x">
+                        <p class="usertext">Benny Goodman</p>
+                        <p class="usertext">Full Stack Divi</p>
+                    </div>
+                    <div class="blcard">
+                        <img src="http://168.61.151.157/wp-content/uploads/2021/11/benny_goodman.png" alt="x">
+                        <p class="usertext">Charlie Goodman</p>
+                        <p class="usertext">Full Stack Divi</p>
+                    </div>
+                    <div class="blcard">
+                        <img src="http://168.61.151.157/wp-content/uploads/2021/11/benny_goodman.png" alt="x">
+                        <p class="usertext">Douglas Goodman</p>
+                        <p class="usertext">Full Stack Divi</p>
+                    </div>
+                    <div class="blcard">
+                        <img src="http://168.61.151.157/wp-content/uploads/2021/11/benny_goodman.png" alt="x">
+                        <p class="usertext">Edmund Goodman</p>
+                        <p class="usertext">Full Stack Divi</p>
+                    </div>
+                    <div class="blcard">
+                        <img src="http://168.61.151.157/wp-content/uploads/2021/11/benny_goodman.png" alt="x">
+                        <p class="usertext">Francis Goodman</p>
+                        <p class="usertext">Full Stack Divi</p>
+                    </div>
+                    <div class="blcard">
+                        <img src="http://168.61.151.157/wp-content/uploads/2021/11/benny_goodman.png" alt="x">
+                        <p class="usertext">Garrett Goodman</p>
+                        <p class="usertext">Full Stack Divi</p>
+                    </div>
+                    <div class="blcard">
+                        <img src="http://168.61.151.157/wp-content/uploads/2021/11/benny_goodman.png" alt="x">
+                        <p class="usertext">Hyronymus Goodman</p>
+                        <p class="usertext">Full Stack Divi</p>
+                    </div>
+                    <div class="blcard">
+                        <img src="http://168.61.151.157/wp-content/uploads/2021/11/benny_goodman.png" alt="x">
+                        <p class="usertext">Ignacius Goodman</p>
+                        <p class="usertext">Full Stack Divi</p>
+                    </div>
+
+                </div>
+
+
+                <div id="controls">
+                    <svg class="arrow left" onClick="adjustPosition(-1)" viewBox="0 0 512 512">
+                        <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                            stroke-width="48" d="M328 112L184 256l144 144" />
+                    </svg>
+
+                    <div id="markers">
+                        <!-- dynamically built -->
+                    </div>
+
+                    <svg class="arrow right" onClick="adjustPosition(1)" viewBox="0 0 512 512">
+                        <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                            stroke-width="48" d="M184 112l144 144-144 144" />
+                    </svg>
+                </div>
+
+            </div>
+
+            <style>
+                /*  add any specific styling needed to support your card data above here */
+
+                #cardstrip .blcard {
+                    display: flex;
+                    box-sizing: border-box;
+                    flex-direction: column;
+                    align-items: center;
+                    min-width: 200px;
+                    padding: 10px;
+                }
+
+                .blcard img {
+                    width: 80%;
+                    max-width: 150px;
+                    margin-bottom: 2rem;
+                }
+
+                .usertext {
+                    color: #4B1249;
+                    font-size: 20px;
+                    font-weight: 700;
+                    white-space: nowrap;
+                    margin: 0;
+                    padding: 0;
+                }
+            </style>
+
+            <!-- *** do not make any changes below this line !!! *** -->
+
+            <!-- core scripting for carousel - do not change -->
+            <script>
+
+                let container, strip, markers;
+                let pos = 0;
+                let showCount;
+                let cardCount = 0;
+
+                const adjustPosition = (delta) => {
+
+                    const availWidth = container.clientWidth;
+
+                    // figure out how many to show (this will change dynamically if width changes)
+                    showCount = Math.max(Math.floor(container.clientWidth / 200), 1);    // max width > det'n how many (at least 1)
+
+                    // recalc position
+                    // user clicks right arrow > pos++
+                    // user clicks left arrow > pos--
+                    // user shrinks window > may change showCount, which changes max, which changes allowable position
+
+                    delta = (typeof delta === 'object') ? 0 : +delta;
+                    pos += delta;
+                    const min = 0;
+                    const max = cardCount - showCount;
+                    pos = Math.max(Math.min(pos, max), min);
+
+                    // calculate width to fit 'showCount' cards in window
+                    const width = container.clientWidth / showCount;
+
+                    // set the position offset
+                    let offset = -1 * width * pos;   // offset to left to account for carousel position
+
+                    // if we have more space than cards, need to add a positive adjustment
+                    // to the offset to ensure centering.
+
+                    if (showCount - cardCount > 0) {
+                        offset += width / 2 * (showCount - cardCount);
+                    }
+
+                    cardstrip.style.marginLeft = offset + "px";
+
+                    // set card widths
+                    [...cardstrip.querySelectorAll(".blcard")].forEach(card => {
+                        card.style.width = width + "px";
+                    });
+
+                    // adjust underline indicator
+                    try {
+                        [...markers.querySelectorAll("svg")].forEach(dot => {
+                            const index = +dot.getAttribute("data-index");
+                            const inRange = (index > pos) && (index <= pos + showCount);
+                            dot.classList.toggle("inrange", inRange);
+                        });
+                    }
+                    catch (err) {
+                        //
+                    }
+                }
+
+
+                const initialize = () => {
+
+                    container = document.querySelector("#container");
+                    cardstrip = document.querySelector("#cardstrip");
+                    markers = document.querySelector("#markers");
+
+                    const cards = [...cardstrip.querySelectorAll(".blcard")];
+                    cardCount = cards.length
+
+                    let cnt = 0;
+                    cards.forEach(card => {
+                        cnt++;
+                        markers.insertAdjacentHTML('beforeend',
+                            `<svg class="marker" data-index="${cnt}" viewBox="0 0 512 512">
+                            <circle cx="256" cy="256" r="144"/>
+                        </svg>`);
+                    })
+
+                    adjustPosition(0);
+
+                }
+
+                window.onload = initialize;
+                window.onresize = adjustPosition;
+
+            </script>
+
+            <!-- core styling for carousel - do not change -->
+            <style>
+                #container {
+                    --medium-gray: #555;
+                    --light-gray: rgba(0, 0, 0, .15);
+                    font-family: inherit;
+                    font-size: 20px;
+                    max-width: 1500px;
+                    min-width: 250px;
+                    /* in divi land this will be 100% of containing row height */
+                    height: 100%;
+                    margin: auto;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    overflow: hidden;
+                }
+
+                #cardstrip {
+                    width: 9999px;
+                    height: 100%;
+                    display: flex;
+                    flex-wrap: nowrap;
+                    align-items: center;
+                    transition: margin-left 0.2s ease-in-out;
+                }
+
+                .arrow {
+                    box-sizing: content-box;
+                    width: 24px;
+                    height: 24px;
+                    padding: 6px 8px;
+                    margin-left: 0.2vw;
+                    margin-right: 0.2vw;
+                    color: var(--light-gray);
+                    border-radius: 3px;
+                    cursor: pointer;
+                }
+
+                .arrow:hover {
+                    color: var(--medium-gray);
+                    background: rgba(0, 0, 0, .03);
+                }
+
+                #controls {
+                    display: flex;
+                    flex-wrap: nowrap;
+                    justify-content: center;
+                    align-content: center;
+                    margin-top: 1em;
+                }
+
+                #markers {
+                    display: flex;
+                    flex-wrap: nowrap;
+                }
+
+                .marker {
+                    box-sizing: content-box;
+                    height: 16px;
+                    width: 16px;
+                    padding: 10px 0.3vw 5px 0.3vw;
+                    border-bottom-width: 2px;
+                    border-bottom-color: transparent;
+                    border-bottom-style: solid;
+                    transition: all 50ms linear;
+                }
+
+                .marker circle {
+                    fill: var(--light-gray);
+                }
+
+                .marker.inrange {
+                    border-bottom-color: var(--light-gray);
+                }
+            </style>
+
+
+        </section>
+        <!-- ========================= END OF DIVI DROP ============================================ -->
+
+    </div>
+
+</body>
+
+</html>

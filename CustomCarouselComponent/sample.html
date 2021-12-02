@@ -29,53 +29,62 @@
                     <!-- insert card data here.  Add appropriate styling as needed -->
 
                     <div class="blcard">
-                        <img src="http://168.61.151.157/wp-content/uploads/2021/11/benny_goodman.png" alt="x">
-                        <p class="usertext">Abe Goodman</p>
-                        <p class="usertext">Full Stack Divi</p>
-                    </div>
-                    <div class="blcard">
-                        <img src="http://168.61.151.157/wp-content/uploads/2021/11/benny_goodman.png" alt="x">
-                        <p class="usertext">Benny Goodman</p>
-                        <p class="usertext">Full Stack Divi</p>
-                    </div>
-                    <div class="blcard">
-                        <img src="http://168.61.151.157/wp-content/uploads/2021/11/benny_goodman.png" alt="x">
-                        <p class="usertext">Charlie Goodman</p>
-                        <p class="usertext">Full Stack Divi</p>
-                    </div>
-                    <div class="blcard">
-                        <img src="http://168.61.151.157/wp-content/uploads/2021/11/benny_goodman.png" alt="x">
-                        <p class="usertext">Douglas Goodman</p>
-                        <p class="usertext">Full Stack Divi</p>
-                    </div>
-                    <div class="blcard">
-                        <img src="http://168.61.151.157/wp-content/uploads/2021/11/benny_goodman.png" alt="x">
-                        <p class="usertext">Edmund Goodman</p>
-                        <p class="usertext">Full Stack Divi</p>
-                    </div>
-                    <div class="blcard">
-                        <img src="http://168.61.151.157/wp-content/uploads/2021/11/benny_goodman.png" alt="x">
-                        <p class="usertext">Francis Goodman</p>
-                        <p class="usertext">Full Stack Divi</p>
-                    </div>
-                    <div class="blcard">
-                        <img src="http://168.61.151.157/wp-content/uploads/2021/11/benny_goodman.png" alt="x">
-                        <p class="usertext">Garrett Goodman</p>
-                        <p class="usertext">Full Stack Divi</p>
-                    </div>
-                    <div class="blcard">
-                        <img src="http://168.61.151.157/wp-content/uploads/2021/11/benny_goodman.png" alt="x">
-                        <p class="usertext">Hyronymus Goodman</p>
-                        <p class="usertext">Full Stack Divi</p>
-                    </div>
-                    <div class="blcard">
-                        <img src="http://168.61.151.157/wp-content/uploads/2021/11/benny_goodman.png" alt="x">
-                        <p class="usertext">Ignacius Goodman</p>
-                        <p class="usertext">Full Stack Divi</p>
+                        <img src="https://wpdevtest.banyanlabs.io/wp-content/uploads/2021/12/DeMarcus-Williams.jpg" alt="x">
+                        <p class="usertext">Demarcus Williams</p>
+                        <p class="usertext">Developer</p>
                     </div>
 
+                    <div class="blcard">
+                        <img src="https://wpdevtest.banyanlabs.io/wp-content/uploads/2021/12/Sarah-Hunt.png" alt="x">
+                        <p class="usertext">Sarah Ramos</p>
+                        <p class="usertext">Developer</p>
+                    </div>
+
+                    <div class="blcard">
+                        <img src="https://wpdevtest.banyanlabs.io/wp-content/uploads/2021/11/Sean-Obrien.jpg" alt="x">
+                        <p class="usertext">Sean O'Brien</p>
+                        <p class="usertext">Developer</p>
+                    </div>
+
+                    <!--
+                    <div class="blcard">
+                        <img src="https://wpdevtest.banyanlabs.io/wp-content/uploads/2021/11/benny_goodman.png" alt="x">
+                        <p class="usertext">Jason Lyles</p>
+                        <p class="usertext">Developer</p>
+                    </div>
+                    <div class="blcard">
+                        <img src="https://wpdevtest.banyanlabs.io/wp-content/uploads/2021/11/benny_goodman.png" alt="x">
+                        <p class="usertext">Joshua Beets</p>
+                        <p class="usertext">Developer</p>
+                    </div>
+                    <div class="blcard">
+                        <img src="https://wpdevtest.banyanlabs.io/wp-content/uploads/2021/11/benny_goodman.png" alt="x">
+                        <p class="usertext">Shandea Hardin</p>
+                        <p class="usertext">Developer</p>
+                    </div>
+                    <div class="blcard">
+                        <img src="https://wpdevtest.banyanlabs.io/wp-content/uploads/2021/11/benny_goodman.png" alt="x">
+                        <p class="usertext">Stephanie Cook</p>
+                        <p class="usertext">Developer</p>
+                    </div>
+                    <div class="blcard">
+                        <img src="https://wpdevtest.banyanlabs.io/wp-content/uploads/2021/11/benny_goodman.png" alt="x">
+                        <p class="usertext">Tamara Eaton</p>
+                        <p class="usertext">Developer</p>
+                    </div>
+                    <div class="blcard">
+                        <img src="https://wpdevtest.banyanlabs.io/wp-content/uploads/2021/11/benny_goodman.png" alt="x">
+                        <p class="usertext">Tiana Turman</p>
+                        <p class="usertext">Developer</p>
+                    </div>
+                    <div class="blcard">
+                        <img src="https://wpdevtest.banyanlabs.io/wp-content/uploads/2021/11/benny_goodman.png" alt="x">
+                        <p class="usertext">Willie Wells</p>
+                        <p class="usertext">Developer</p>
+                    </div>
+                    -->
                 </div>
-
+                
 
                 <div id="controls">
                     <svg class="arrow left" onClick="adjustPosition(-1)" viewBox="0 0 512 512">
@@ -110,6 +119,7 @@
                 .blcard img {
                     width: 80%;
                     max-width: 150px;
+                    border-radius: 50%;
                     margin-bottom: 2rem;
                 }
 
@@ -128,6 +138,7 @@
             <!-- core scripting for carousel - do not change -->
             <script>
 
+                let maxCount = 5;   // max number of cards to show
                 let container, strip, markers;
                 let pos = 0;
                 let showCount;
@@ -139,6 +150,7 @@
 
                     // figure out how many to show (this will change dynamically if width changes)
                     showCount = Math.max(Math.floor(container.clientWidth / 200), 1);    // max width > det'n how many (at least 1)
+                    showCount = Math.min(showCount, maxCount);
 
                     // recalc position
                     // user clicks right arrow > pos++
@@ -219,7 +231,7 @@
                     --light-gray: rgba(0, 0, 0, .15);
                     font-family: inherit;
                     font-size: 20px;
-                    max-width: 1500px;
+                    max-width: 1300px;
                     min-width: 250px;
                     /* in divi land this will be 100% of containing row height */
                     height: 100%;

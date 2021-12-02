@@ -4,6 +4,7 @@ Custom Carousel Component Code Module for Divi
 
 Author: Greg Hammond
 Revisions: 11/18/2021 - created
+            12/02/2021 - added everyone; limit to show max 5 
 
 
 ### Running sample.html
